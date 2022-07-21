@@ -40,7 +40,6 @@
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
 	<bean id="dao" class="com.spring.test.dao.EmpDao">    
-		<property name="template" ref="jt"></property>    
 		<property name="session" ref="sqlSessoinTemplate"></property>    
 	</bean>
 

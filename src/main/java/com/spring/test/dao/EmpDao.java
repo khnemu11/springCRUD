@@ -16,14 +16,8 @@ import com.spring.test.beans.Emp;
 
 @Repository("dao")
 public class EmpDao {
-	@Resource(name="jt")
-	JdbcTemplate template;
 	@Resource(name="sqlSessoinTemplate")
 	SqlSessionTemplate session;
-	
-	public void setTemplate(JdbcTemplate template) {    
-	    this.template = template;    
-	}    
 	public void setSession(SqlSessionTemplate session) {
 		this.session = session;
 	}

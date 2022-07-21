@@ -19,9 +19,9 @@ import com.spring.test.dao.EmpDao;
 
 @Controller    
 public class EmpController {    
-    
 	@Resource(name="dao") 
-	EmpDao dao;//will inject dao from XML file    
+	EmpDao dao;//will inject dao from XML file 
+	
 	@Resource(name="sqlSessionFactory") 
 	SqlSessionFactory sqlFactory;
     /*It displays a form to input data, here "command" is a reserved request attribute  
