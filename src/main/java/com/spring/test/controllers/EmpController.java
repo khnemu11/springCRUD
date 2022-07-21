@@ -2,6 +2,10 @@ package com.spring.test.controllers;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +19,11 @@ import com.spring.test.dao.EmpDao;
 
 @Controller    
 public class EmpController {    
-    @Autowired    
-    EmpDao dao;//will inject dao from XML file    
-        
+    
+	@Resource(name="dao") 
+	EmpDao dao;//will inject dao from XML file    
+	@Resource(name="sqlSessionFactory") 
+	SqlSessionFactory sqlFactory;
     /*It displays a form to input data, here "command" is a reserved request attribute  
      *which is used to display object data into form  
      */    
@@ -37,8 +43,17 @@ public class EmpController {
     /* It provides list of employees in model object */    
     @RequestMapping("/viewemp")    
     public String viewemp(Model m){    
-        List<Emp> list=dao.getEmployees();    
-        m.addAttribute("list",list);  
+    	try {
+    		 List<Emp> list=dao.getEmployees();    
+    	     m.addAttribute("list",list);  
+    	     
+    	     SqlSession session = sqlFactory.openSession();
+    	     System.out.println("success");
+    	}catch(Exception ex){
+    		  System.out.println("fail");
+    		  ex.printStackTrace();
+    	}
+       
         return "viewemp";    
     }    
     /* It displays object data into form for the given id.   
